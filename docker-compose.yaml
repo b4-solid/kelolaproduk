@@ -1,0 +1,7 @@
+services:
+  kelola-produk:
+    build: .
+    container_name: kelolaproduk
+    ports:
+      - 8082:8082
+    restart: always

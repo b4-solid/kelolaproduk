@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.util.UUID;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/api/products")
@@ -21,34 +21,33 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        Product newProduct = productService.addProduct(product);
-        return ResponseEntity.ok(newProduct);
+    public CompletableFuture<ResponseEntity<Product>> addProduct(@RequestBody Product product) {
+        return CompletableFuture.supplyAsync(() -> ResponseEntity.ok(productService.addProduct(product)));
+    }
+
+    @GetMapping
+    public CompletableFuture<ResponseEntity<List<Product>>> getAllProducts() {
+        return CompletableFuture.supplyAsync(() -> ResponseEntity.ok(productService.findAllProduct()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable UUID id) {
-        Product product = productService.getProductById(id);
-        return ResponseEntity.ok(product);
+    public CompletableFuture<ResponseEntity<Product>> getProductById(@PathVariable Long id) {
+        return CompletableFuture.supplyAsync(() -> productService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build()));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable UUID id, @RequestBody Product product) {
-        product.setId(id);
-        Product updatedProduct = productService.updateProduct(product);
-        return ResponseEntity.ok(updatedProduct);
+    public CompletableFuture<ResponseEntity<Product>> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+        return CompletableFuture.supplyAsync(() -> {
+            product.setId(id);
+            return ResponseEntity.ok(productService.updateProduct(product));
+        });
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable UUID id) {
-        productService.deleteProduct(id);
-        return ResponseEntity.ok().build();
-    }
-
-    @PatchMapping("/{id}/discount")
-    public ResponseEntity<Product> applyDiscountToProduct(@PathVariable UUID id, @RequestParam BigDecimal discountRate) {
-        productService.applyDiscount(id, discountRate);
-        Product discountedProduct = productService.getProductById(id);
-        return ResponseEntity.ok(discountedProduct);
+    public CompletableFuture<ResponseEntity<Void>> deleteProduct(@PathVariable Long id) {
+        return CompletableFuture.runAsync(() -> productService.deleteProduct(id))
+                .thenApply(e -> ResponseEntity.noContent().<Void>build());
     }
 }

@@ -2,44 +2,33 @@ package id.ac.ui.cs.advpro.kelolaproduk.model;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.junit.jupiter.api.Assertions.*;
+public class ProductTest {
 
-class ProductTest {
-    Product product;
     @Test
-    void testGetUserID() {
-        this.product= new Product();
-        this.product.setId(UUID.fromString("eb558e9f-1c39-460e-8860-71af6af63bd6"));
-        assertEquals(UUID.fromString("eb558e9f-1c39-460e-8860-71af6af63bd6"), this.product.getId());
+    void testProductGettersAndSetters() {
+        Product product = new Product();
+        product.setId(1L);
+        product.setHarga(100);
+        product.setName("Test Product");
+        product.setDeskripsi("Test Description");
+        product.setImageLink("http://test.link");
+
+        assertThat(product.getId()).isEqualTo(1L);
+        assertThat(product.getHarga()).isEqualTo(100);
+        assertThat(product.getName()).isEqualTo("Test Product");
+        assertThat(product.getDeskripsi()).isEqualTo("Test Description");
+        assertThat(product.getImageLink()).isEqualTo("http://test.link");
     }
 
     @Test
-    void testGetTitle() {
-        this.product = new Product();
-        this.product.setTitle("Youkoso Store");
-        assertEquals("Youkoso Store", this.product.getTitle());
-    }
-
-    @Test
-    void testGetDescription() {
-        this.product = new Product();
-        this.product.setDescription("Ini adalah sepatu naiki");
-        assertEquals("Ini adalah sepatu naiki", this.product.getDescription());
-    }
-
-    @Test
-    void testGetStock() {
-        this.product = new Product();
-        this.product.setStock(5);
-        assertEquals(5, this.product.getStock());
-    }
-
-    @Test
-    void testGetImageUrl() {
-        this.product = new Product();
-        this.product.setImageUrl("https://blog.rosihanari.net/wp-content/uploads/2022/01/dummy02.png");
-        assertEquals("https://blog.rosihanari.net/wp-content/uploads/2022/01/dummy02.png", this.product.getImageUrl());
+    void testProductConstructor() {
+        Product product = new Product(1L, 100, "Test Product", "Test Description", "http://test.link");
+        assertThat(product.getId()).isEqualTo(1L);
+        assertThat(product.getHarga()).isEqualTo(100);
+        assertThat(product.getName()).isEqualTo("Test Product");
+        assertThat(product.getDeskripsi()).isEqualTo("Test Description");
+        assertThat(product.getImageLink()).isEqualTo("http://test.link");
     }
 }

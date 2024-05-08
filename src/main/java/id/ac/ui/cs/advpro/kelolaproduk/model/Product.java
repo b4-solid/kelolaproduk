@@ -2,31 +2,50 @@ package id.ac.ui.cs.advpro.kelolaproduk.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.math.BigDecimal;
-import java.util.UUID;
+import jakarta.validation.constraints.*;
 
-@Getter
-@Setter
 @Entity
+@Table(name = "product")
 public class Product {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    private UUID id;
-    private String title;
-    private String description;
-    private BigDecimal price;
-    private Integer stock;
-    private String imageUrl;
-    private BigDecimal discountPrice;
-    private Boolean isDiscounted;
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @Column(name = "id")
+    @NotNull
+    @Getter
+    @Setter
+    private long id;
 
-    public void applyDiscount(BigDecimal discountRate) {
-        if (discountRate.compareTo(BigDecimal.ZERO) > 0 && discountRate.compareTo(BigDecimal.ONE) < 0) {
-            this.isDiscounted = true;
-            this.discountPrice = this.price.multiply(BigDecimal.ONE.subtract(discountRate));
-        } else {
-            throw new IllegalArgumentException("Invalid discount rate. Must be > 0 and < 1.");
-        }
+    @Column(name = "harga")
+    @NotNull
+    @Getter
+    @Setter
+    private Integer harga;
+
+    @Column(name = "name")
+    @NotNull
+    @Getter
+    @Setter
+    private String name;
+
+    @Column(name = "deskripsi")
+    @Getter
+    @Setter
+    private String deskripsi;
+
+    @Column(name = "imageLink")
+    @Getter
+    @Setter
+    private String imageLink;
+
+    public Product() {
+    }
+
+    public Product(long id, Integer harga, String name, String deskripsi, String imageLink) {
+        this.id = id;
+        this.harga = harga;
+        this.name = name;
+        this.deskripsi = deskripsi;
+        this.imageLink = imageLink;
     }
 }

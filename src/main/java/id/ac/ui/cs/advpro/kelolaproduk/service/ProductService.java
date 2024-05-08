@@ -2,13 +2,13 @@ package id.ac.ui.cs.advpro.kelolaproduk.service;
 
 import id.ac.ui.cs.advpro.kelolaproduk.model.Product;
 
-import java.math.BigDecimal;
-import java.util.UUID;
+import java.util.Optional;
+import java.util.List;
 
 public interface ProductService {
-    Product getProductById(UUID id);
+    List<Product> findAllProduct();
+    Optional<Product> findById(Long id);
     Product addProduct(Product product);
     Product updateProduct(Product product);
-    void deleteProduct(UUID productId);
-    void applyDiscount(UUID productId, BigDecimal discountRate);
+    void deleteProduct(Long id);
 }

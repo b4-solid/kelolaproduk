@@ -22,11 +22,17 @@ public class ProductModel {
     @Setter
     private Integer harga;
 
-    @Column(name = "name")
+    @Column(name = "stok")
     @NotNull
     @Getter
     @Setter
-    private String name;
+    private Integer stok;
+
+    @Column(name = "nama")
+    @NotNull
+    @Getter
+    @Setter
+    private String nama;
 
     @Column(name = "deskripsi")
     @Getter
@@ -41,10 +47,10 @@ public class ProductModel {
     public ProductModel() {
     }
 
-    public ProductModel(long id, Integer harga, String name, String deskripsi, String imageLink) {
+    public ProductModel(long id, Integer harga, Integer stok, String nama, String deskripsi, String imageLink) {
         this.id = id;
         this.harga = harga;
-        this.name = name;
+        this.nama = nama;
         this.deskripsi = deskripsi;
         this.imageLink = imageLink;
     }

@@ -2,7 +2,6 @@ package id.ac.ui.cs.advpro.kelolaproduk.controller;
 
 import id.ac.ui.cs.advpro.kelolaproduk.model.ProductModel;
 import id.ac.ui.cs.advpro.kelolaproduk.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,12 +9,11 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/products")
 public class ProductController {
 
     private final ProductService productService;
 
-    @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
     }

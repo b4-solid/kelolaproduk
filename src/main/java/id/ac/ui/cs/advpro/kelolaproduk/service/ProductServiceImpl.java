@@ -1,6 +1,6 @@
 package id.ac.ui.cs.advpro.kelolaproduk.service;
 
-import id.ac.ui.cs.advpro.kelolaproduk.model.Product;
+import id.ac.ui.cs.advpro.kelolaproduk.model.ProductModel;
 import id.ac.ui.cs.advpro.kelolaproduk.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +20,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product addProduct(Product product) {
-        return productRepository.save(product);
+    public ProductModel addProduct(ProductModel productModel) {
+        return productRepository.save(productModel);
     }
 
     @Override
-    public List<Product> findAllProduct() {
+    public List<ProductModel> findAllProduct() {
         return productRepository.findAll();
     }
 
     @Override
-    public Optional<Product> findById(Long id) {
+    public Optional<ProductModel> findById(Long id) {
         return productRepository.findById(id);
     }
 
     @Override
-    public Product updateProduct(Product product) {
-        return productRepository.save(product);
+    public ProductModel updateProduct(ProductModel productModel) {
+        return productRepository.save(productModel);
     }
 
     @Override

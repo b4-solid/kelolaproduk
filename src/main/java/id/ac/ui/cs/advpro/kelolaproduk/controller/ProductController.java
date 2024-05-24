@@ -1,6 +1,6 @@
 package id.ac.ui.cs.advpro.kelolaproduk.controller;
 
-import id.ac.ui.cs.advpro.kelolaproduk.model.Product;
+import id.ac.ui.cs.advpro.kelolaproduk.model.ProductModel;
 import id.ac.ui.cs.advpro.kelolaproduk.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,27 +21,27 @@ public class ProductController {
     }
 
     @PostMapping
-    public CompletableFuture<ResponseEntity<Product>> addProduct(@RequestBody Product product) {
-        return CompletableFuture.supplyAsync(() -> ResponseEntity.ok(productService.addProduct(product)));
+    public CompletableFuture<ResponseEntity<ProductModel>> addProduct(@RequestBody ProductModel productModel) {
+        return CompletableFuture.supplyAsync(() -> ResponseEntity.ok(productService.addProduct(productModel)));
     }
 
     @GetMapping
-    public CompletableFuture<ResponseEntity<List<Product>>> getAllProducts() {
+    public CompletableFuture<ResponseEntity<List<ProductModel>>> getAllProducts() {
         return CompletableFuture.supplyAsync(() -> ResponseEntity.ok(productService.findAllProduct()));
     }
 
     @GetMapping("/{id}")
-    public CompletableFuture<ResponseEntity<Product>> getProductById(@PathVariable Long id) {
+    public CompletableFuture<ResponseEntity<ProductModel>> getProductById(@PathVariable Long id) {
         return CompletableFuture.supplyAsync(() -> productService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build()));
     }
 
     @PutMapping("/{id}")
-    public CompletableFuture<ResponseEntity<Product>> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+    public CompletableFuture<ResponseEntity<ProductModel>> updateProduct(@PathVariable Long id, @RequestBody ProductModel productModel) {
         return CompletableFuture.supplyAsync(() -> {
-            product.setId(id);
-            return ResponseEntity.ok(productService.updateProduct(product));
+            productModel.setId(id);
+            return ResponseEntity.ok(productService.updateProduct(productModel));
         });
     }
 

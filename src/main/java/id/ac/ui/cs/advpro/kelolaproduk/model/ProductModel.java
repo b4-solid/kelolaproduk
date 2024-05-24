@@ -6,7 +6,7 @@ import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "product")
-public class Product {
+public class ProductModel {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -38,10 +38,10 @@ public class Product {
     @Setter
     private String imageLink;
 
-    public Product() {
+    public ProductModel() {
     }
 
-    public Product(long id, Integer harga, String name, String deskripsi, String imageLink) {
+    public ProductModel(long id, Integer harga, String name, String deskripsi, String imageLink) {
         this.id = id;
         this.harga = harga;
         this.name = name;

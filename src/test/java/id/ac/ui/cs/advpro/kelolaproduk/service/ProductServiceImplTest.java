@@ -1,6 +1,6 @@
 package id.ac.ui.cs.advpro.kelolaproduk.service;
 
-import id.ac.ui.cs.advpro.kelolaproduk.model.Product;
+import id.ac.ui.cs.advpro.kelolaproduk.model.ProductModel;
 import id.ac.ui.cs.advpro.kelolaproduk.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,10 +25,10 @@ public class ProductServiceImplTest {
 
     @Test
     void testAddProduct() {
-        Product product = new Product();
-        when(productRepository.save(product)).thenReturn(product);
-        Product savedProduct = productService.addProduct(product);
-        assertThat(savedProduct).isNotNull();
+        ProductModel productModel = new ProductModel();
+        when(productRepository.save(productModel)).thenReturn(productModel);
+        ProductModel savedProductModel = productService.addProduct(productModel);
+        assertThat(savedProductModel).isNotNull();
     }
 
     @Test
@@ -39,16 +39,16 @@ public class ProductServiceImplTest {
 
     @Test
     void testFindById() {
-        Optional<Product> optionalProduct = Optional.of(new Product());
+        Optional<ProductModel> optionalProduct = Optional.of(new ProductModel());
         when(productRepository.findById(1L)).thenReturn(optionalProduct);
         assertThat(productService.findById(1L)).isNotEmpty();
     }
 
     @Test
     void testUpdateProduct() {
-        Product product = new Product();
-        when(productRepository.save(product)).thenReturn(product);
-        assertThat(productService.updateProduct(product)).isEqualTo(product);
+        ProductModel productModel = new ProductModel();
+        when(productRepository.save(productModel)).thenReturn(productModel);
+        assertThat(productService.updateProduct(productModel)).isEqualTo(productModel);
     }
 
     @Test

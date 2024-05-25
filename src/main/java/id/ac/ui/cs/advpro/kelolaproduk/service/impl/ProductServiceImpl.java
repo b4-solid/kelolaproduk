@@ -1,7 +1,8 @@
-package id.ac.ui.cs.advpro.kelolaproduk.service;
+package id.ac.ui.cs.advpro.kelolaproduk.service.impl;
 
 import id.ac.ui.cs.advpro.kelolaproduk.model.ProductModel;
 import id.ac.ui.cs.advpro.kelolaproduk.repository.ProductRepository;
+import id.ac.ui.cs.advpro.kelolaproduk.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
